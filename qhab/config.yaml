@@ -1,0 +1,97 @@
+---
+
+io:
+    wd: .
+    input: ./aln_225.extxyz
+    load_args:
+        format: extxyz
+        index: ":"
+    format:
+      fig: png
+      fc2: hdf5
+      atom: extxyz
+      mesh: hdf5
+      band: yaml
+      tdos: dat
+      qha:
+          dat: true
+          fig: true
+      # TODO add . configureation via  plot ype
+
+calculator:
+    calc: 7net
+    model: zero
+    modal: false
+    batch: false
+    d3: false
+    calc_args:
+        enable_flash: true
+    tag: 7net_0
+
+unitcell:
+    run: true
+    save: ./unitcell
+
+strain:
+    run: true
+    restart: false
+    save: ./strain
+    eps: [-0.04, -0.02, 0.00, 0.02, 0.04, 0.06, 0.08]
+
+supercell:
+    generate: true
+    calc: true
+    restart: false
+    matrix: [4, 4, 4]
+    distance: 0.01
+    random_seed: 42
+    save: ./supercell
+
+fc2:
+    run: true
+    restart: false
+    save: ./fc2
+
+mesh:
+    run: true
+    restart: false
+    mesh: 
+        run: true
+        numbers: [48, 48, 48]
+    thermal:
+        run: true
+        t_min: 0
+        t_max: 1201
+        t_step: 1
+    tdos:
+        run: true
+    pdos:
+        run: true
+    band:
+        run: true
+    save: ./mesh
+
+qha:
+    run: true
+    t_max: 1301
+    thin_number: 50
+    eos: birch_murnaghan
+    save: ./qha
+
+relax:
+    unitcell:
+        fmax: 1.0e-5
+        steps: 5000
+        optimizer: fire2
+        fix_symm: true
+        cell_filter: frechet
+        mask: [1, 1, 1, 1, 1, 1]
+    strain:
+        fmax: 1.0e-05
+        steps: 5000
+        optimizer:  fire2
+        fix_symm: true
+        const_vol: true
+        cell_filter: frechet
+        mask: [1, 1, 1, 1, 1, 1]
+...
