@@ -1,13 +1,12 @@
 import Path
 
 IO = {
-    "dir": '.',
-    "wd": Path().resolve(),
-    "input": "./POSCAR",
+    "wd": '.'
+    "input": "./aln.extxyz",
     "load_args": {
         "format": "extxyz",
-        "index": None
-    },
+        "index": ";",
+                },
     "format": {
         "fig": "png",
         "fc2": "hdf5",
@@ -18,9 +17,9 @@ IO = {
         "qha": {
             "dat": True,
             "fig": True
-        }
+                },
+            },
     }
-}
 
 CALCULATOR = {
     "calc": "7net",
@@ -32,19 +31,19 @@ CALCULATOR = {
         "enable_flash": True
     },
     "tag": "7net_0"
-}
+            }
 
 UNITCELL = {
     "run": True,
     "save": "./unitcell"
-}
+            }
 
 STRAIN = {
     "run": True,
     "restart": False,
     "save": "./strain",
     "eps": [-0.04, -0.02, 0.00, 0.02, 0.04, 0.06, 0.08]
-}
+        }
 
 SUPERCELL = {
     "generate": True,
@@ -54,13 +53,13 @@ SUPERCELL = {
     "distance": 0.01,
     "random_seed": 42,
     "save": "./supercell"
-}
+        }
 
 FC2 = {
     "run": True,
     "restart": False,
     "save": "./fc2"
-}
+    }
 
 MESH= {
     "run": True,
@@ -68,26 +67,26 @@ MESH= {
     "mesh": {
         "run": True,
         "numbers": [48, 48, 48]
-    },
+            },
     "thermal": {
         "run": True,
         "t_min": 0,
         "t_max": 1201,
         "t_step": 1
-    },
+            },
     "tdos": {"run": True},
     "pdos": {"run": True},
     "band": {"run": True},
     "save": "./mesh"
-}
+    }
 
 QHA = {
     "run": True,
-    "t_max": 1301,
+    "t_max": 1201,
     "thin_number": 50,
     "eos": "birch_murnaghan",
     "save": "./qha"
-}
+    }
 
 RELAX = {
     "unitcell": {
@@ -97,7 +96,7 @@ RELAX = {
         "fix_symm": True,
         "cell_filter": "frechet",
         "mask": [1, 1, 1, 1, 1, 1]
-    },
+                },
     "strain": {
         "fmax": 1.0e-5,
         "steps": 5000,
@@ -106,5 +105,5 @@ RELAX = {
         "const_vol": True,
         "cell_filter": "frechet",
         "mask": [1, 1, 1, 1, 1, 1]
+                },
     }
-}
