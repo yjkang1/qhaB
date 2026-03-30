@@ -6,7 +6,6 @@ import ase.io as ase_IO
 import numpy as np
 
 from qhab.logger import logger
-from qhab.util.utils import load_mesh_yaml, load_mesh_hdf5, imag_dos_frac, aseatoms2phonoatoms, check_imaginary_freqs
 
 def run_mesh_computation(config):
     name = config['io']['name']
@@ -25,7 +24,7 @@ def run_mesh_computation(config):
 
         if config['mesh']['mesh']['run']:
             ph.run_mesh(config['mesh']['mesh'])
-            phonon.write_hdf5_mesh(filename=f'{cwd}/mesh-{name}-{eps}.hdf5')
+            ph.write_hdf5_mesh(filename=f'{cwd}/mesh-{name}-{eps}.hdf5')
             # freqs, weights = ph.get_mesh_dict()['frequencies'], ph.get_mesh_dict['weights']
             # TODO; check imag freqs
 
@@ -43,7 +42,7 @@ def run_mesh_computation(config):
         if config['mesh']['tdos']['run']:
             # no difference with auto_total_dos(mesh=mesh_numbers)
             ph.run_total_dos()
-            phonon.write_total_dos(f'{cwd}/tdos-{name}-{eps}.dat')
+            ph.write_total_dos(f'{cwd}/tdos-{name}-{eps}.dat')
 
             if config['mesh']['band']['run']:
                 ph.auto_band_structure(write_yaml=True, filename=f'{cwd}/band-{name}-{eps}.yaml')

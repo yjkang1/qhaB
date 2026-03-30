@@ -15,6 +15,7 @@ from qhab.logger import logger
 def process_qha(config):
     name = config['io']['name']
     logger.info(f'Preprocessing inputs for QHA of {name}')
+    conf = config['qha']
 
     cwd = os.path.join(config["io"]["abswd"], config["qha"]["save"])
     strain_wd = os.path.join(config["io"]["abswd"], config["strain"]["save"])
@@ -103,5 +104,5 @@ def process_qha(config):
     qha.write_helmholtz_volume_fitted(filename='helmhotz_volume_full.dat', thin_number=config['harmonic']['t_step'])
     qha.plot_pdf_helmholtz_volume(filename='helmhotz_volume_full.png', thin_number=config['harmonic']['t_step'])
 
-    qha._bulk_modulus.plot().savefig(f'{conf["eos"]}.png')
+    qha._bulk_modulus.plot().savefig(f'eos_{conf["eos"]}.png')
     matplotlib.pyplot.close()

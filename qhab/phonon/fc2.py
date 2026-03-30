@@ -12,11 +12,10 @@ def run_fc2_computation(config):
     prev_wd = os.path.join(config["io"]["abswd"], config["supercell"]["save"])
 
     for i, eps in enumerate(config['strain']['eps']):
-        logger.info(f'Computing 2nd-order force constants for volumetric strain {eps} [{i+1}/{len(config["strain"]["eps"]}]')
+        logger.info(f'Computing 2nd-order force constants for volumetric strain {eps} [{i+1}/{len(config["strain"]["eps"])}]')
         ph = load(f'{prev_wd}/{name}-{eps}-phonopy.yaml.xz')
         force_set = np.load(f'{prev_wd}/{name}-{eps}-force_set.npy')
         ph.forces = force_set
         ph.produce_force_constants()
         fc2 = ph.force_constants
         ph_IO.write_force_constants_to_hdf5(force_constants=fc2, filename=f'{cwd}/{name}-{eps}-force_constants.hdf5')
-
