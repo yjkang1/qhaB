@@ -26,14 +26,14 @@ class StepRecorder:
         recorder = StepRecorder()
 
     # main.py
-        from cte2bench.util.logger import recorder
+        from qhab.util.logger import recorder
         recorder.set_log_file(os.path.join(cwd, f"{tag}.log"))
 
         with recorder.step("Structural Relaxation"):
             run_unitcell_relaxation(...)
 
     # any submodule
-        from cte2bench.util.logger import recorder
+        from qhab.util.logger import recorder
         recorder.info("Force calculation starting...")
     """
 
@@ -41,7 +41,7 @@ class StepRecorder:
 
     def __init__(
         self,
-        name     : str               = "cte2bench",
+        name     : str               = "qhab",
         log_file : str | Path | None = None,
         level    : int               = logging.INFO,
     ):

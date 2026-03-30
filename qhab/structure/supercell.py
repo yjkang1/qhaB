@@ -14,7 +14,7 @@ def calculate_force(supercells_with_displacements, calc):
         logger.info(f'processing ')
         atoms = ase_IO.read(supercell)
         atoms = single_point_calculate(atoms, calc)
-        force_set.append(atoms.get_force())
+        force_set.append(atoms.get_forces())
     return np.array(force_set)
 
 def run_force_calculation(config, calc):
@@ -23,6 +23,6 @@ def run_force_calculation(config, calc):
 
     for i, eps in enumerate(config['strain']['eps']):
         logger.info(f'Processing one-shot force calculation of supercell for {name} with volumetric strain {eps}')
-        supercells_with_displacements = glob.glob(f'{cwd}/{name}-{eps}-*')
+        supercells_with_displacements = glob.glob(f'{cwd}/{name}-{eps}-*.extxyz')
         force_set = calculate_force(supercells_with_displacements, calc)
         np.save(file=f'{cwd}/{name}-{eps}-force_set', arr=force_set)

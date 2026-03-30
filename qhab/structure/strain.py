@@ -28,11 +28,11 @@ def run_volume_fixed_relaxation(config, calc):
 
         steps, force_conv = strained.info['steps'], strained.info['force_conv']
         post_vol = round(strained.get_volume()/len(strained), 4)
-        ase_IO.write(f'{cwd}/{name}-{eps}_relaxed.extxyz', strained, format='extxyz')
+        # ase_IO.write(f'{cwd}/{name}-{eps}_relaxed.extxyz', strained, format='extxyz')
 
         strained_output.append(strained)
 
-        if steps >= config['opt']['strain']['steps'] or not force_conv:
+        if steps >= config['relax']['strain']['steps'] or not force_conv:
             logger.warning(f'{name} volume-fixed relaxation of {eps} strain did not converge in {steps}')
         else:
             logger.info(f'Volume-fixed relaxation of {name} with {eps} strain was successfully converged in {steps}')

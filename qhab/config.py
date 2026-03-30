@@ -3,7 +3,7 @@ IO = {
     "input": "./aln.extxyz",
     "load_args": {
         "format": "extxyz",
-        "index": ";",
+        "index": 0,
                 },
     "format": {
         "fig": "png",
@@ -48,6 +48,7 @@ SUPERCELL = {
     "calc": True,
     "restart": False,
     "matrix": [4, 4, 4],
+    "primitive": [[1,0,0],[0,1,0],[0,0,1]],
     "distance": 0.01,
     "random_seed": 42,
     "save": "./supercell"
@@ -100,7 +101,7 @@ RELAX = {
         "steps": 5000,
         "optimizer": "fire2",
         "fix_symm": True,
-        "const_vol": True,
+        "const_volume": True,
         "cell_filter": "frechet",
         "mask": [1, 1, 1, 1, 1, 1]
                 },

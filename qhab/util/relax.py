@@ -47,12 +47,14 @@ class AseRelaxer:
         optimizer.run(fmax=self.fmax, steps=self.steps)
         # torch.cuda.synchronize() # why did I add this line ..?
         atoms.info['steps'] = optimizer.get_number_of_steps()
+        atoms.info['e_fr_energy'] = atoms.get_potential_energy(force_consistent=True) # w/o force_consistent=True for now
+        atoms.info['e_0_energy'] = atoms.get_potential_energy(force_consistent=False) # w/o force_consistent=True for now
         force_conv = check_atoms_conv(atoms.get_forces())
         atoms.info['force_conv'] = force_conv
         return atoms
 
 def get_relaxer(config, calc, opt_type='unitcell', logfile='relax.log'):
-    arr_args = config['opt'][f'{opt_type}'].copy()
+    arr_args = config['relax'][f'{opt_type}'].copy()
 
     opt = OPT_DCT.get(arr_args['optimizer'].lower(), FIRE2)
     cell_filter = FILTER_DCT.get(arr_args['cell_filter'], FrechetCellFilter)

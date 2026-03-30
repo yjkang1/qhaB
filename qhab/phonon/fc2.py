@@ -19,3 +19,4 @@ def run_fc2_computation(config):
         ph.produce_force_constants()
         fc2 = ph.force_constants
         ph_IO.write_force_constants_to_hdf5(force_constants=fc2, filename=f'{cwd}/{name}-{eps}-force_constants.hdf5')
+        ph_IO.write_FORCE_CONSTANTS(force_constants=fc2, filename=f'{cwd}/{name}-{eps}-FORCE_CONSTANTS') # debug

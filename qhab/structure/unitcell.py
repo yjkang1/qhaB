@@ -20,7 +20,7 @@ def run_unitcell_relaxation(config, calc):
     steps, force_conv = atoms.info['steps'], atoms.info['force_conv']
     ase_IO.write(f'{cwd}/{name}-unitcell_relaxed.extxyz', atoms, format='extxyz')
 
-    if steps >= config['opt']['unitcell']['steps'] or not force_conv:
+    if steps >= config['relax']['unitcell']['steps'] or not force_conv:
         logger.warning(f'{name} unit cell relaxation did not converge in {steps}')
     else:
         logger.info(f'{name} unit cell relaxation successfully converged in {steps}')

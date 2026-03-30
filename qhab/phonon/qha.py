@@ -23,12 +23,12 @@ def run_qha(config):
     fc2_wd = os.path.join(config["io"]["abswd"], config["fc2"]["save"])
     mesh_wd = os.path.join(config["io"]["abswd"], config["mesh"]["save"])
 
-    ph = load(f'{fc2_wd}/{name}-{eps}-phonopy.yaml.xz')
-    primitive_matrix = ph.primitive_matirx
+    # ph = load(f'{fc2_wd}/{name}-{eps}-phonopy.yaml.xz')
+    primitive_matrix = np.array(config['supercell']['primitive'])
     primitive_factor = np.linalg.norm(np.linalg.det(primitive_matrix))
 
     strained_atoms = ase_IO.read(f'{strain_wd}/{name}-strained_relaxed.extxyz', index=':')
-    energies = np.array([atoms.info['energy'] for atoms in strained_atoms]) * primitive_factor
+    energies = np.array([atoms.info['e_fr_energy'] for atoms in strained_atoms]) * primitive_factor
     volumes = np.array([atoms.get_volume() for atoms in strained_atoms]) * primitive_factor
 
     thermal_filenames= []
@@ -48,20 +48,21 @@ def run_qha(config):
     entropy = np.array(entropy, dtype=float)
     fe_phonon = np.array(fe_phonon, dtype=float)
 
-    qha_kwargs = {'volumes': volumes, 'electronic_energies': free_energies,
+    qha_kwargs = {'volumes': volumes, 'electronic_energies': energies,
                     'temperatures': temperatures, 'free_energy': fe_phonon,
                     'cv': cv, 'entropy': entropy, 'eos': conf['eos'], 't_max': conf['t_max'],
                     'verbose': True}
 
     if len(volumes) < 5:
         logger.warning('At least 5 volume points needed for EOS fitting .. returning')
-        continue
+        return
 
     os.chdir(cwd)
     qha = PhonopyQHA(**qha_kwargs)
    
     logger.info(f'Plotting QHA results ...')
     # qha.plot_qha(thin_number=thin_number).savefig(f'{cwd}/qha_plot.png')
+    thin_number = conf['thin_number']
     qha.plot_qha(thin_number=thin_number).savefig(f'qha_plot.pdf')
     matplotlib.pyplot.close()
 
@@ -101,8 +102,8 @@ def run_qha(config):
 
     qha.write_gruneisen_temperature()
 
-    qha.write_helmholtz_volume_fitted(filename='helmhotz_volume_full.dat', thin_number=config['harmonic']['t_step'])
-    qha.plot_pdf_helmholtz_volume(filename='helmhotz_volume_full.png', thin_number=config['harmonic']['t_step'])
+    qha.write_helmholtz_volume_fitted(filename='helmhotz_volume_full.dat', thin_number=config['mesh']['t_step'])
+    qha.plot_pdf_helmholtz_volume(filename='helmhotz_volume_full.png', thin_number=config['mesh']['t_step'])
 
     qha._bulk_modulus.plot().savefig(f'eos_{conf["eos"]}.png')
     matplotlib.pyplot.close()

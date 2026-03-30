@@ -26,13 +26,14 @@ def pre_record(config):
         'natom': len(atoms),
         'uMLIP': config['calculator'].get('calc', '?'),
         'model': config['calculator'].get('model', '?'),
-        'modal': config['calculator'].get('calc', 'N/A'),
+        'modal': config['calculator'].get('modal', 'N/A'),
     }
 
     info.update(atoms_info)
 
     print('---Pre-run information---')
     pprint.pprint(info)
+    pprint.pprint(config)
     print('... dumped at wd\n')
     dumpYAML(info, filename=f'{config["io"]["abswd"]}/qhaB.info')
 
@@ -55,8 +56,8 @@ def main(argv: list[str] | None=None) -> None:
     with open(config_dir, 'r') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
-    config['io']['wd'] = config['io']['name'] = name
-    config['io']['abswd'] = abswd = os.path.abspath(name)
+    config['io']['name'] = name
+    config['io']['abswd'] = abswd = os.getcwd()
     os.makedirs(abswd, exist_ok=True)
 
     config = parse_config(config)
@@ -67,8 +68,7 @@ def main(argv: list[str] | None=None) -> None:
     pre_record(config)
     logger.separator()
 
-
-    if any([config['unitcell']['run'], config['strain']['run'], config['supercell']['run']]):
+    if any([config['unitcell']['run'], config['strain']['run'], config['supercell']['calc']]):
         from qhab.calculator.tools import load_calc
         logger.separator()
         logger.info('Loading uMLIP calculator')
@@ -76,39 +76,47 @@ def main(argv: list[str] | None=None) -> None:
         calc = load_calc(config)
 
         if config['unitcell']['run']:
+            logger.separator()
             from qhab.structure.unitcell import run_unitcell_relaxation
             with logger.step("Structural Relaxation of Input Structure"):
                 run_unitcell_relaxation(config, calc)
 
         if config['strain']['run']:
+            logger.separator()
             from qhab.structure.strain import run_volume_fixed_relaxation
             with logger.step("Volume Fixed Relaxation of Strained Structures"):
                 run_volume_fixed_relaxation(config, calc)
 
         if config['supercell']['generate']:
+            logger.separator()
             from qhab.phonon.supercell import run_supercell_generation
             with logger.step("Generation of Supercells with Displacements for FC2 Computation"):
                 run_supercell_generation(config)
 
         if config['supercell']['calc']:
+            logger.separator()
             from qhab.structure.supercell import run_force_calculation
             with logger.step("Force Calculation of Supercell Structure"):
                 run_force_calculation(config, calc)
 
     if config['fc2']['run']:
+        logger.separator()
         from qhab.phonon.fc2 import run_fc2_computation
         with logger.step("FC2 Computation from Generated Force Sets"):
             run_fc2_computation(config)
 
     if config['mesh']['run']:
+        logger.separator()
         from qhab.phonon.mesh import run_mesh_computation
         with logger.step("Harmonic Mesh Computation"):
             run_mesh_computation(config)
 
     if config['qha']['run']:
+        logger.separator()
         from qhab.phonon.qha import run_qha
         with logger.step("QHA Computation"):
             run_qha(config)
+    return
 
 if __name__ == '__main__':
     main()

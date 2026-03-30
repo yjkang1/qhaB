@@ -1,6 +1,6 @@
 import os
 
-from qhab.config import IO, CALCULATOR, UNITCELL, STRAIN, FC2, MESH, QHA, RELAX
+from qhab.config import IO, CALCULATOR, UNITCELL, STRAIN, SUPERCELL, FC2, MESH, QHA, RELAX
 
 DEFAULT_CONFIG = {
     'io': IO,
@@ -9,6 +9,7 @@ DEFAULT_CONFIG = {
     "strain": STRAIN,
     "fc2": FC2,
     "mesh": MESH,
+    "supercell": SUPERCELL,
     "qha": QHA,
     "relax": RELAX,
 }
@@ -20,7 +21,7 @@ def override_default(override: dict, default: dict = DEFAULT_CONFIG) -> dict:
     merged = default.copy()
     for key, value in override.items():
         if key in merged and isinstance(merged[key], dict) and isinstance(value, dict):
-            merged[key] = override_default(merged[key], value)
+            merged[key] = override_default(value, merged[key])
         else:
             merged[key] = value
     return merged
@@ -35,7 +36,7 @@ def finalize_default(config):
     config['calculator']['tag'] = tag
 
     # wd = '/'.join(map(str, filter(_is_defined, [calc, model, modal])))
-    assert os.path.isfile(config['io']['input']), 'Input structure file must be provided.'
+    assert os.path.isfile(input_file := config['io']['input']), f'Input file {input_file} N/A !'
     
     for key in DEFAULT_CONFIG.keys():
         if config[key].get('save'):
@@ -62,8 +63,3 @@ if __name__ == '__main__':
 
     parsed_yaml = f'{config["io"]["abswd"]}/parsed.yaml'
     dumpYAML(config, parsed_yaml)
-    return config
-
-
-
-
