@@ -37,5 +37,5 @@ packages = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ywllnkang/qhaB"/
+Homepage = "https://github.com/ywllnkang/qhaB"
 Issues = "https://github.com/ywllnkang/qhaB/issues"
