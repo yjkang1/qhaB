@@ -12,7 +12,7 @@ from qhab.logger import logger
 
 #TODO: rcparams
 
-def process_qha(config):
+def run_qha(config):
     name = config['io']['name']
     logger.info(f'Preprocessing inputs for QHA of {name}')
     conf = config['qha']

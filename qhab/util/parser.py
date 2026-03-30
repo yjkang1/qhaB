@@ -49,7 +49,7 @@ def parse_config(config):
     config = finalize_default(config)
     return config
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     import sys, yaml
     from qhab.util.io import dumpYAML
 

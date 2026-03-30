@@ -37,7 +37,7 @@ def run_volume_fixed_relaxation(config, calc):
         else:
             logger.info(f'Volume-fixed relaxation of {name} with {eps} strain was successfully converged in {steps}')
 
-        if init_sgn != post_sgn:
+        if init_sgn != (post_sgn := get_spgnum(strained)):
             logger.warning(f'Symmetry of {name} w/ {eps} strain changed from {init_sgn} to {post_sgn} during relaxation')
         else:
             logger.info(f'Symmetry of {name} w/ {eps} did not break during relaxation')

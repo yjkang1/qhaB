@@ -73,7 +73,7 @@ mesh:
 
 qha:
     run: true
-    t_max: 1301
+    t_max: 1201
     thin_number: 50
     eos: birch_murnaghan
     save: ./qha

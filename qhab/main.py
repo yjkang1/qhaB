@@ -100,17 +100,15 @@ def main(argv: list[str] | None=None) -> None:
         with logger.step("FC2 Computation from Generated Force Sets"):
             run_fc2_computation(config)
 
-    if config['harmonic']['run']:
-        from qhab.phonon.harmonic import process_harmonic
-        process_harmonic(config)
+    if config['mesh']['run']:
+        from qhab.phonon.mesh import run_mesh_computation
+        with logger.step("Harmonic Mesh Computation"):
+            run_mesh_computation(config)
 
     if config['qha']['run']:
-        from qhab.phonon.qha import process_qha
-        process_qha(config)
-
-    if args.task.lower() in ['qha']:
-        from qhab.phonon.qha import process_qha
-        process_qha(config)
+        from qhab.phonon.qha import run_qha
+        with logger.step("QHA Computation"):
+            run_qha(config)
 
 if __name__ == '__main__':
     main()
