@@ -5,8 +5,8 @@ import os, gc, warnings
 import ase.io as ase_IO
 import numpy as np
 
-from cte2bench.logger import logger
-from cte2bench.util.utils import load_mesh_yaml, load_mesh_hdf5, imag_dos_frac, aseatoms2phonoatoms, check_imaginary_freqs
+from qhab.logger import logger
+from qhab.util.utils import load_mesh_yaml, load_mesh_hdf5, imag_dos_frac, aseatoms2phonoatoms, check_imaginary_freqs
 
 def run_mesh_computation(config):
     name = config['io']['name']

@@ -2,10 +2,10 @@ import argparse, warnings, sys, os, pprint, yaml
 from ase.io import read
 from pathlib import Path
 
-from cte2bench.util.utils import get_spg
-from cte2bench.util.parser import parse_config
-from cte2bench.logger import logger
-from cte2bench.util.io import dumpYAML
+from qhab.util.utils import get_spg
+from qhab.util.parser import parse_config
+from qhab.logger import logger
+from qhab.util.io import dumpYAML
 
 SLURM_VARS = [
     'SLURM_JOB_ID',
@@ -69,47 +69,47 @@ def main(argv: list[str] | None=None) -> None:
 
 
     if any([config['unitcell']['run'], config['strain']['run'], config['supercell']['run']]):
-        from cte2bench.calculator.tools import load_calc
+        from qhab.calculator.tools import load_calc
         logger.separator()
         logger.info('Loading uMLIP calculator')
         logger.separator()
         calc = load_calc(config)
 
         if config['unitcell']['run']:
-            from cte2bench.structure.unitcell import run_unitcell_relaxation
+            from qhab.structure.unitcell import run_unitcell_relaxation
             with logger.step("Structural Relaxation of Input Structure"):
                 run_unitcell_relaxation(config, calc)
 
         if config['strain']['run']:
-            from cte2bench.structure.strain import run_volume_fixed_relaxation
+            from qhab.structure.strain import run_volume_fixed_relaxation
             with logger.step("Volume Fixed Relaxation of Strained Structures"):
                 run_volume_fixed_relaxation(config, calc)
 
         if config['supercell']['generate']:
-            from cte2bench.phonon.supercell import run_supercell_generation
+            from qhab.phonon.supercell import run_supercell_generation
             with logger.step("Generation of Supercells with Displacements for FC2 Computation"):
                 run_supercell_generation(config)
 
         if config['supercell']['calc']:
-            from cte2bench.structure.supercell import run_force_calculation
+            from qhab.structure.supercell import run_force_calculation
             with logger.step("Force Calculation of Supercell Structure"):
                 run_force_calculation(config, calc)
 
     if config['fc2']['run']:
-        from cte2bench.phonon.fc2 import run_fc2_computation
+        from qhab.phonon.fc2 import run_fc2_computation
         with logger.step("FC2 Computation from Generated Force Sets"):
             run_fc2_computation(config)
 
     if config['harmonic']['run']:
-        from cte2bench.phonon.harmonic import process_harmonic
+        from qhab.phonon.harmonic import process_harmonic
         process_harmonic(config)
 
     if config['qha']['run']:
-        from cte2bench.phonon.qha import process_qha
+        from qhab.phonon.qha import process_qha
         process_qha(config)
 
     if args.task.lower() in ['qha']:
-        from cte2bench.phonon.qha import process_qha
+        from qhab.phonon.qha import process_qha
         process_qha(config)
 
 if __name__ == '__main__':

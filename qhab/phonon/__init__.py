@@ -1,3 +1,3 @@
 from importlib.metadata import version
 
-__version__ = version('cte2bench')
+__version__ = version('qhab')

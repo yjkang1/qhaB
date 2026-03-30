@@ -4,8 +4,8 @@ import numpy as np
 
 import ase.io as ase_IO
 
-from cte2bench.calculator.tools import single_point_calculate_list, single_point_calculate # lets do this atomically
-from cte2bench.logger import logger
+from qhab.calculator.tools import single_point_calculate_list, single_point_calculate # lets do this atomically
+from qhab.logger import logger
 
 def calculate_force(supercells_with_displacements, calc):
     supercell_atoms_list = []

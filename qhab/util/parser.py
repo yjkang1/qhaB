@@ -1,6 +1,6 @@
 import os
 
-from cte2bench.config import IO, CALCULATOR, UNITCELL, STRAIN, FC2, MESH, QHA, RELAX
+from qhab.config import IO, CALCULATOR, UNITCELL, STRAIN, FC2, MESH, QHA, RELAX
 
 DEFAULT_CONFIG = {
     'io': IO,
@@ -51,7 +51,7 @@ def parse_config(config):
 
 if __name__ = '__main__':
     import sys, yaml
-    from cte2bench.util.io import dumpYAML
+    from qhab.util.io import dumpYAML
 
     config_yaml = sys.argv[1]
 

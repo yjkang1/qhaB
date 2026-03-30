@@ -4,7 +4,7 @@ import os
 
 import phonopy.file_IO as ph_IO
 
-from cte2bench.logger import logger
+from qhab.logger import logger
 
 def run_fc2_computation(config):
     name = config['io']['name']

@@ -7,35 +7,35 @@ build-backend = "setuptools.build_meta"
 
 
 [project]
-name = "cte2bench"
-version = "0.0.1"
+name = "qhab"
+version = "0.0.0"
 authors = [
-  { name = "Yujin(Will) Kang", email = "yjkang@snu.ac.kr" },
+  { name = "Yujin Kang", email = "yjkang@snu.ac.kr" },
   ]
-description = "python package for benchmarking the volumetric coefficient of thermal expansion with universal machine learning interatomic potentials; benchmark dataset - phononDB"
+description = "python package for calculating the coefficient of thermal expansion via quasi-harmonic approximation and v-ZSISA"
 readme = "README.md"
 requires-python = ">=3.11"
 
 dependencies = [
     "phonopy",
-    "phono3py",
+    # "phono3py",
     "pymatgen",
     "seekpath",
 ]
     # spglib
 
 [project.scripts]
-cte2bench = "cte2bench.main:main"
+qhab = "qhab.main:main"
 
 [tool.setuptools]
 packages = [
-    "cte2bench",
-    "cte2bench.calculator",
-    "cte2bench.structure",
-    "cte2bench.phonon",
-    "cte2bench.util",
+    "qhab",
+    "qhab.calculator",
+    "qhab.structure",
+    "qhab.phonon",
+    "qhab.util",
 ]
 
 [project.urls]
-Homepage = "https://github.com/ywllnkang/cte2-benchmark"
-Issues = "https://github.com/ywllnkang/cte2-benchmark/issues"
+Homepage = "https://github.com/ywllnkang/qhaB"/
+Issues = "https://github.com/ywllnkang/qhaB/issues"

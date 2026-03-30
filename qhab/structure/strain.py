@@ -3,9 +3,9 @@ import gc, os
 
 # import torch
 
-from cte2bench.logger import logger
-from cte2bench.util.utils import get_spgnum, apply_isometric_strain
-from cte2bench.util.relax import get_relaxer
+from qhab.logger import logger
+from qhab.util.utils import get_spgnum, apply_isometric_strain
+from qhab.util.relax import get_relaxer
 
 def run_volume_fixed_relaxation(config, calc):
     name = config['io']['name']

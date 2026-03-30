@@ -6,8 +6,8 @@ from phonopy import file_IO as ph_IO
 # from phonopy.interface.vasp import write_supercells_with_displacements #TODO ??
 import ase.io as ase_IO
 
-from cte2bench.logger import logger
-from cte2bench.util.utils import aseatoms2phonoatoms, phonoatoms2aseatoms
+from qhab.logger import logger
+from qhab.util.utils import aseatoms2phonoatoms, phonoatoms2aseatoms
 
 
 def run_supercell_generation(config):

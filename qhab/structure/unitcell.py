@@ -1,9 +1,9 @@
 import ase.io as ase_IO
 import gc, os
-from cte2bench.util.relax import get_relaxer
-from cte2bench.util.utils import get_spgnum
+from qhab.util.relax import get_relaxer
+from qhab.util.utils import get_spgnum
 
-from cte2bench.logger import logger
+from qhab.logger import logger
 
 def run_unitcell_relaxation(config, calc):
     name = config['io']['name']
