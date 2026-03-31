@@ -23,7 +23,7 @@ def run_volume_fixed_relaxation(config, calc):
         strained = apply_isometric_strain(atoms, eps)
         init_vol = round(strained.get_volume()/len(strained), 4)
 
-        relaxer.run(strained)
+        strained = relaxer.run(strained)
         strained.calc = None
 
         steps, force_conv = strained.info['steps'], strained.info['force_conv']
