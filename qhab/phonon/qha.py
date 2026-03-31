@@ -102,8 +102,8 @@ def run_qha(config):
 
     qha.write_gruneisen_temperature()
 
-    qha.write_helmholtz_volume_fitted(filename='helmhotz_volume_full.dat', thin_number=config['mesh']['t_step'])
-    qha.plot_pdf_helmholtz_volume(filename='helmhotz_volume_full.png', thin_number=config['mesh']['t_step'])
+    qha.write_helmholtz_volume_fitted(filename='helmhotz_volume_full.dat', thin_number=config['mesh']['thermal']['t_step'])
+    qha.plot_pdf_helmholtz_volume(filename='helmhotz_volume_full.png', thin_number=config['mesh']['thermal']['t_step'])
 
     qha._bulk_modulus.plot().savefig(f'eos_{conf["eos"]}.png')
     matplotlib.pyplot.close()
