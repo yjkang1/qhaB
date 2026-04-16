@@ -9,7 +9,15 @@ from sevenn.calculator import SevenNetCalculator
 CALC_DCT = {
     'ompa': '/path/to/ompa/checkpoint_2.pth',
     'omni': '/path/to/omni/checkpoint_1.pth',
+    'nano': '/path/to/nano',
     }
+
+NANO_DCT = {
+        4.5: 'nano_cut4.5',
+        5.0: 'nano_cut5.0',
+        5.5: 'nano_cut5.5',
+        6.0: 'nano_cut6.0',
+        }
 
 FUNC_DCT = {
     'mpa': 'PBE',
@@ -28,14 +36,24 @@ def return_calc(config):
     model, modal = conf.get('model', 'zero'), conf.get('modal', None)
 
     is_zero = (str(model).lower() in ['zero', '0'])
-    model_path = CALC_DCT.get(model, None)
+    is_nano = (str.(model).lower() == 'nano')
+    model_path = CALC_DCT.get(model, None) 
+    if is_nano:
+        model_path = os.path.join(model_path, NANO_DCT[modal], 'checkpoint_2.pth')
 
-    if model_path:
+    if is_nano:
+        calc_kwargs = {
+                'model': model_path,
+                'enable_flash': True
+                } 
+
+    elif model_path:
         calc_kwargs = {
             'model': model_path,
             'modal': modal,
             'enable_flash': True, #TODO;
         }
+
     else:
         if is_zero:
             calc_kwargs = {
