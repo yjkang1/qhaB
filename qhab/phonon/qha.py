@@ -26,23 +26,34 @@ def run_qha(config):
     # ph = load(f'{fc2_wd}/{name}-{eps}-phonopy.yaml.xz')
     primitive_matrix = np.array(config['supercell']['primitive'])
     primitive_factor = np.linalg.norm(np.linalg.det(primitive_matrix))
+    
+    sampling = "symmetric" if conf['symm'] else "displaced"
+
+    qha_eps = conf['qha']['eps']
+    tot_eps = conf['strain']['eps']
+    logger.info(f'Have outputs for strains: {tot_eps}. Total {len(tot_eps)} volume points.')
+    logger.info(f'Volume sampling for QHA: {sampling} around unit cell volume.')
+    logger.info(f'QHA will run with {qha_eps} and outputs will be saved at {cwd}.')
+
+    energies, volumes, thermal_yamls = [], [], []
 
     strained_atoms = ase_IO.read(f'{strain_wd}/{name}-strained_relaxed.extxyz', index=':')
-    energies = np.array([atoms.info['e_fr_energy'] for atoms in strained_atoms]) * primitive_factor
-    volumes = np.array([atoms.get_volume() for atoms in strained_atoms]) * primitive_factor
+    strained_map = {atoms.info['eps']: atoms for atoms in strained_atoms}
 
-    thermal_filenames= []
-
-    #TODO ; imaginary freqs
-
-    logger.info(f'Collected volumes and energies .. primitive factor: {primitive_factor}')
-
-    for i, eps in enumerate(config['strain']['eps']):
-        thermal_filenames.append(f'{mesh_wd}/{name}-{eps}-thermal_properties.yaml')
-
+    for eps in qha_eps:
+        energies.append(strained_map[eps].info['e_fr_energy'])
+        volumes.append(strained_map[eps].get_volume())
+        thermal_yamls.append(f'{mesh_wd}/{name}-{eps}-thermal_properties.yaml')
     logger.info(f'Collected thermal properties !')
 
-    temperatures, cv, entropy, fe_phonon, _, _ = read_thermal_properties_yaml(filenames=thermal_filenames)
+    energies = np.array(energies) * primitive_factor
+    volumes = np.array(volumes) * primitive_factor
+
+    #TODO ; imaginary freqs, why supercell['primitive']?
+
+    logger.info(f'Collected volumes and energies .. scaled with primitive factor: {primitive_factor}')
+
+    temperatures, cv, entropy, fe_phonon, _, _ = read_thermal_properties_yaml(filenames=thermal_yamls)
     temperatures = np.array(temperatures, dtype=float)
     cv = np.array(cv, dtype=float)
     entropy = np.array(entropy, dtype=float)
