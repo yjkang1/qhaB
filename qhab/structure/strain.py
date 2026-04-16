@@ -22,6 +22,8 @@ def run_volume_fixed_relaxation(config, calc):
         logger.info(f'Relaxing structure with volumetric strain {eps}')
         strained = apply_isometric_strain(atoms, eps)
         init_vol = round(strained.get_volume()/len(strained), 4)
+        strained.info['index'] = i
+        strained.info['eps'] = eps
 
         strained = relaxer.run(strained)
         strained.calc = None
