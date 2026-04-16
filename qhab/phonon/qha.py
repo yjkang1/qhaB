@@ -29,8 +29,8 @@ def run_qha(config):
     
     sampling = "symmetric" if conf['symm'] else "displaced"
 
-    qha_eps = conf['qha']['eps']
-    tot_eps = conf['strain']['eps']
+    qha_eps = config['qha']['eps']
+    tot_eps = config['strain']['eps']
     logger.info(f'Have outputs for strains: {tot_eps}. Total {len(tot_eps)} volume points.')
     logger.info(f'Volume sampling for QHA: {sampling} around unit cell volume.')
     logger.info(f'QHA will run with {qha_eps} and outputs will be saved at {cwd}.')
