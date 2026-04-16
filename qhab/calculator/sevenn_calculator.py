@@ -3,7 +3,7 @@ Modified based on Jinmu Yu's code
 """
 
 from types import NotImplementedType
-import warnings
+import warnings, os
 from sevenn.calculator import SevenNetCalculator
 
 CALC_DCT = {
@@ -36,7 +36,7 @@ def return_calc(config):
     model, modal = conf.get('model', 'zero'), conf.get('modal', None)
 
     is_zero = (str(model).lower() in ['zero', '0'])
-    is_nano = (str.(model).lower() == 'nano')
+    is_nano = (str(model).lower() == 'nano')
     model_path = CALC_DCT.get(model, None) 
     if is_nano:
         model_path = os.path.join(model_path, NANO_DCT[modal], 'checkpoint_2.pth')
@@ -44,6 +44,7 @@ def return_calc(config):
     if is_nano:
         calc_kwargs = {
                 'model': model_path,
+                'file_type': 'checkpoint',
                 'enable_flash': True
                 } 
 

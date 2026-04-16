@@ -32,7 +32,7 @@ def finalize_default(config):
     calc, model, modal = conf.get('calc', 'sevennet'), conf.get('model', 'zero'), conf.get('modal', None)
     assert any([calc, model, modal]), 'At least one of uMLIP Calcualtor, Model, or Modal must be provided.'
 
-    tag = '_'.join(map(str, filter(_is_defined, [calc, model, modal])))
+    tag = '-'.join(map(str, filter(_is_defined, [calc, model, modal])))
     config['calculator']['tag'] = tag
 
     # wd = '/'.join(map(str, filter(_is_defined, [calc, model, modal])))

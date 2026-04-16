@@ -21,14 +21,14 @@ IO = {
 
 CALCULATOR = {
     "calc": "7net",
-    "model": "zero",
-    "modal": False,
+    "model": "nano",
+    "modal": 4.5,
     "batch": False,
     "d3": False,
     "calc_args": {
         "enable_flash": True
     },
-    "tag": "7net_0"
+    "tag": "7net-nano-4.5"
             }
 
 UNITCELL = {
@@ -40,7 +40,7 @@ STRAIN = {
     "run": True,
     "restart": False,
     "save": "./strain",
-    "eps": [-0.04, -0.02, 0.00, 0.02, 0.04, 0.06, 0.08]
+    "eps": [-0.05, -0.04, -0.03, -0.02, 0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08]
         }
 
 SUPERCELL = {
@@ -83,8 +83,10 @@ QHA = {
     "run": True,
     "t_max": 1201,
     "thin_number": 50,
+    "eps": [-0.05, -0.04, -0.03, -0.02, 0.00, 0.01, 0.02, 0.03, 0.04, 0.05],
     "eos": "birch_murnaghan",
-    "save": "./qha"
+    "save": "./qha-symm",
+    "symm": True,
     }
 
 RELAX = {
