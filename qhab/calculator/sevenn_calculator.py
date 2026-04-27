@@ -41,7 +41,6 @@ def return_calc(config):
     if is_nano:
         model_path = os.path.join(model_path, NANO_DCT[modal], 'checkpoint_2.pth')
 
-    if is_nano:
         calc_kwargs = {
                 'model': model_path,
                 'file_type': 'checkpoint',
