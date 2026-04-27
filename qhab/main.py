@@ -1,6 +1,7 @@
 import argparse, warnings, sys, os, pprint, yaml
 from ase.io import read
 from pathlib import Path
+import shutil
 
 from qhab.util.utils import get_spg
 from qhab.util.parser import parse_config
@@ -35,6 +36,8 @@ def pre_record(config):
     pprint.pprint(info)
     pprint.pprint(config)
     print('... dumped at wd\n')
+    # pre_runs = len(glob.glob(f'{config["io"]["abswd"]}/qha.*'))
+
     dumpYAML(info, filename=f'{config["io"]["abswd"]}/qhaB.info')
 
 
