@@ -1,0 +1,112 @@
+2026-03-31 13:36:26 | INFO     | Log file : <run_dir>/qhaB.stdout
+2026-03-31 13:36:26 | INFO     | ────────────────────────────────────────────────────────────────────────
+2026-03-31 13:36:26 | INFO     | Initiating qhaB
+2026-03-31 13:36:26 | INFO     | ────────────────────────────────────────────────────────────────────────
+2026-03-31 13:36:26 | INFO     | ────────────────────────────────────────────────────────────────────────
+2026-03-31 13:36:26 | INFO     | Loading uMLIP calculator
+2026-03-31 13:36:26 | INFO     | ────────────────────────────────────────────────────────────────────────
+2026-03-31 13:37:01 | INFO     | ────────────────────────────────────────────────────────────────────────
+2026-03-31 13:37:01 | INFO     | [START ] Structural Relaxation of Input Structure @ 2026-03-31 13:37:01
+2026-03-31 13:37:04 | INFO     | MgO_225 unit cell relaxation successfully converged in 25
+2026-03-31 13:37:04 | INFO     | Symmetry of MgO_225 did not break during unitcell relaxation
+2026-03-31 13:37:04 | INFO     | [END   ] Structural Relaxation of Input Structure @ 2026-03-31 13:37:04  |  elapsed: 3.352s
+2026-03-31 13:37:04 | INFO     | ────────────────────────────────────────────────────────────────────────
+2026-03-31 13:37:04 | INFO     | [START ] Volume Fixed Relaxation of Strained Structures @ 2026-03-31 13:37:04
+2026-03-31 13:37:04 | INFO     | Relaxing structure with volumetric strain -0.04
+2026-03-31 13:37:04 | INFO     | Volume-fixed relaxation of MgO_225 with -0.04 strain was successfully converged in 0
+2026-03-31 13:37:04 | INFO     | Symmetry of MgO_225 w/ -0.04 did not break during relaxation
+2026-03-31 13:37:04 | INFO     | Volume/atom of MgO_225 w/ -0.04 did not change during relaxation (8.5177 \AA^3/atom)
+2026-03-31 13:37:04 | INFO     | Relaxing structure with volumetric strain -0.02
+2026-03-31 13:37:04 | INFO     | Volume-fixed relaxation of MgO_225 with -0.02 strain was successfully converged in 0
+2026-03-31 13:37:04 | INFO     | Symmetry of MgO_225 w/ -0.02 did not break during relaxation
+2026-03-31 13:37:04 | INFO     | Volume/atom of MgO_225 w/ -0.02 did not change during relaxation (9.0612 \AA^3/atom)
+2026-03-31 13:37:04 | INFO     | Relaxing structure with volumetric strain 0.0
+2026-03-31 13:37:05 | INFO     | Volume-fixed relaxation of MgO_225 with 0.0 strain was successfully converged in 0
+2026-03-31 13:37:05 | INFO     | Symmetry of MgO_225 w/ 0.0 did not break during relaxation
+2026-03-31 13:37:05 | INFO     | Volume/atom of MgO_225 w/ 0.0 did not change during relaxation (9.6274 \AA^3/atom)
+2026-03-31 13:37:05 | INFO     | Relaxing structure with volumetric strain 0.02
+2026-03-31 13:37:05 | INFO     | Volume-fixed relaxation of MgO_225 with 0.02 strain was successfully converged in 0
+2026-03-31 13:37:05 | INFO     | Symmetry of MgO_225 w/ 0.02 did not break during relaxation
+2026-03-31 13:37:05 | INFO     | Volume/atom of MgO_225 w/ 0.02 did not change during relaxation (10.2167 \AA^3/atom)
+2026-03-31 13:37:05 | INFO     | Relaxing structure with volumetric strain 0.04
+2026-03-31 13:37:05 | INFO     | Volume-fixed relaxation of MgO_225 with 0.04 strain was successfully converged in 0
+2026-03-31 13:37:05 | INFO     | Symmetry of MgO_225 w/ 0.04 did not break during relaxation
+2026-03-31 13:37:05 | INFO     | Volume/atom of MgO_225 w/ 0.04 did not change during relaxation (10.8295 \AA^3/atom)
+2026-03-31 13:37:05 | INFO     | Relaxing structure with volumetric strain 0.06
+2026-03-31 13:37:05 | INFO     | Volume-fixed relaxation of MgO_225 with 0.06 strain was successfully converged in 0
+2026-03-31 13:37:05 | INFO     | Symmetry of MgO_225 w/ 0.06 did not break during relaxation
+2026-03-31 13:37:05 | INFO     | Volume/atom of MgO_225 w/ 0.06 did not change during relaxation (11.4664 \AA^3/atom)
+2026-03-31 13:37:05 | INFO     | Relaxing structure with volumetric strain 0.08
+2026-03-31 13:37:06 | INFO     | Volume-fixed relaxation of MgO_225 with 0.08 strain was successfully converged in 0
+2026-03-31 13:37:06 | INFO     | Symmetry of MgO_225 w/ 0.08 did not break during relaxation
+2026-03-31 13:37:06 | INFO     | Volume/atom of MgO_225 w/ 0.08 did not change during relaxation (12.1278 \AA^3/atom)
+2026-03-31 13:37:06 | INFO     | [END   ] Volume Fixed Relaxation of Strained Structures @ 2026-03-31 13:37:06  |  elapsed: 1.637s
+2026-03-31 13:37:06 | INFO     | ────────────────────────────────────────────────────────────────────────
+2026-03-31 13:37:06 | INFO     | [START ] Generation of Supercells with Displacements for FC2 Computation @ 2026-03-31 13:37:06
+2026-03-31 13:37:06 | INFO     | Generating phonopy object & supercells with displacements for volumetric strain -0.04
+2026-03-31 13:37:11 | INFO     | Saved phonopy object with unitcell + supercell information for volumetric strain -0.04
+2026-03-31 13:37:11 | INFO     | Generating phonopy object & supercells with displacements for volumetric strain -0.02
+2026-03-31 13:37:18 | INFO     | Saved phonopy object with unitcell + supercell information for volumetric strain -0.02
+2026-03-31 13:37:18 | INFO     | Generating phonopy object & supercells with displacements for volumetric strain 0.0
+2026-03-31 13:37:22 | INFO     | Saved phonopy object with unitcell + supercell information for volumetric strain 0.0
+2026-03-31 13:37:22 | INFO     | Generating phonopy object & supercells with displacements for volumetric strain 0.02
+2026-03-31 13:37:24 | INFO     | Saved phonopy object with unitcell + supercell information for volumetric strain 0.02
+2026-03-31 13:37:24 | INFO     | Generating phonopy object & supercells with displacements for volumetric strain 0.04
+2026-03-31 13:37:28 | INFO     | Saved phonopy object with unitcell + supercell information for volumetric strain 0.04
+2026-03-31 13:37:28 | INFO     | Generating phonopy object & supercells with displacements for volumetric strain 0.06
+2026-03-31 13:37:31 | INFO     | Saved phonopy object with unitcell + supercell information for volumetric strain 0.06
+2026-03-31 13:37:31 | INFO     | Generating phonopy object & supercells with displacements for volumetric strain 0.08
+2026-03-31 13:37:35 | INFO     | Saved phonopy object with unitcell + supercell information for volumetric strain 0.08
+2026-03-31 13:37:35 | INFO     | [END   ] Generation of Supercells with Displacements for FC2 Computation @ 2026-03-31 13:37:35  |  elapsed: 28.895s
+2026-03-31 13:37:35 | INFO     | ────────────────────────────────────────────────────────────────────────
+2026-03-31 13:37:35 | INFO     | [START ] Force Calculation of Supercell Structure @ 2026-03-31 13:37:35
+2026-03-31 13:37:35 | INFO     | Processing one-shot force calculation of supercell for MgO_225 with volumetric strain -0.04
+2026-03-31 13:37:35 | INFO     | processing 
+2026-03-31 13:37:35 | INFO     | processing 
+2026-03-31 13:37:36 | INFO     | Processing one-shot force calculation of supercell for MgO_225 with volumetric strain -0.02
+2026-03-31 13:37:36 | INFO     | processing 
+2026-03-31 13:37:36 | INFO     | processing 
+2026-03-31 13:37:36 | INFO     | Processing one-shot force calculation of supercell for MgO_225 with volumetric strain 0.0
+2026-03-31 13:37:36 | INFO     | processing 
+2026-03-31 13:37:36 | INFO     | processing 
+2026-03-31 13:37:36 | INFO     | Processing one-shot force calculation of supercell for MgO_225 with volumetric strain 0.02
+2026-03-31 13:37:36 | INFO     | processing 
+2026-03-31 13:37:36 | INFO     | processing 
+2026-03-31 13:37:36 | INFO     | Processing one-shot force calculation of supercell for MgO_225 with volumetric strain 0.04
+2026-03-31 13:37:36 | INFO     | processing 
+2026-03-31 13:37:36 | INFO     | processing 
+2026-03-31 13:37:36 | INFO     | Processing one-shot force calculation of supercell for MgO_225 with volumetric strain 0.06
+2026-03-31 13:37:36 | INFO     | processing 
+2026-03-31 13:37:36 | INFO     | processing 
+2026-03-31 13:37:37 | INFO     | Processing one-shot force calculation of supercell for MgO_225 with volumetric strain 0.08
+2026-03-31 13:37:37 | INFO     | processing 
+2026-03-31 13:37:37 | INFO     | processing 
+2026-03-31 13:37:37 | INFO     | [END   ] Force Calculation of Supercell Structure @ 2026-03-31 13:37:37  |  elapsed: 2.054s
+2026-03-31 13:37:37 | INFO     | ────────────────────────────────────────────────────────────────────────
+2026-03-31 13:37:37 | INFO     | [START ] FC2 Computation from Generated Force Sets @ 2026-03-31 13:37:37
+2026-03-31 13:37:37 | INFO     | Computing 2nd-order force constants for volumetric strain -0.04 [1/7]
+2026-03-31 13:37:42 | INFO     | Computing 2nd-order force constants for volumetric strain -0.02 [2/7]
+2026-03-31 13:37:47 | INFO     | Computing 2nd-order force constants for volumetric strain 0.0 [3/7]
+2026-03-31 13:37:53 | INFO     | Computing 2nd-order force constants for volumetric strain 0.02 [4/7]
+2026-03-31 13:38:13 | INFO     | Computing 2nd-order force constants for volumetric strain 0.04 [5/7]
+2026-03-31 13:38:17 | INFO     | Computing 2nd-order force constants for volumetric strain 0.06 [6/7]
+2026-03-31 13:38:22 | INFO     | Computing 2nd-order force constants for volumetric strain 0.08 [7/7]
+2026-03-31 13:38:28 | INFO     | [END   ] FC2 Computation from Generated Force Sets @ 2026-03-31 13:38:28  |  elapsed: 51.561s
+2026-03-31 13:38:28 | INFO     | ────────────────────────────────────────────────────────────────────────
+2026-03-31 13:38:28 | INFO     | [START ] Harmonic Mesh Computation                @ 2026-03-31 13:38:28
+2026-03-31 13:38:28 | INFO     | Computing mesh and mesh properties for volumetric strain -0.04 [1/7]
+2026-03-31 13:38:42 | INFO     | Computing mesh and mesh properties for volumetric strain -0.02 [2/7]
+2026-03-31 13:38:52 | INFO     | Computing mesh and mesh properties for volumetric strain 0.0 [3/7]
+2026-03-31 13:39:02 | INFO     | Computing mesh and mesh properties for volumetric strain 0.02 [4/7]
+2026-03-31 13:39:13 | INFO     | Computing mesh and mesh properties for volumetric strain 0.04 [5/7]
+2026-03-31 13:39:23 | INFO     | Computing mesh and mesh properties for volumetric strain 0.06 [6/7]
+2026-03-31 13:39:33 | INFO     | Computing mesh and mesh properties for volumetric strain 0.08 [7/7]
+2026-03-31 13:39:42 | INFO     | [END   ] Harmonic Mesh Computation                @ 2026-03-31 13:39:42  |  elapsed: 1m 13.8s
+2026-03-31 13:39:42 | INFO     | ────────────────────────────────────────────────────────────────────────
+2026-03-31 13:39:42 | INFO     | [START ] QHA Computation                          @ 2026-03-31 13:39:42
+2026-03-31 13:39:42 | INFO     | Preprocessing inputs for QHA of MgO_225
+2026-03-31 13:39:42 | INFO     | Collected volumes and energies .. primitive factor: 0.25
+2026-03-31 13:39:42 | INFO     | Collected thermal properties !
+2026-03-31 13:39:43 | INFO     | Plotting QHA results ...
+2026-03-31 13:39:46 | INFO     | writting down qha data
+2026-03-31 13:39:48 | INFO     | [END   ] QHA Computation                          @ 2026-03-31 13:39:48  |  elapsed: 6.222s
