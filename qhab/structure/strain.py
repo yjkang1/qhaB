@@ -11,6 +11,7 @@ def run_volume_fixed_relaxation(config, calc):
     name = config['io']['name']
     cwd = os.path.join(config["io"]["abswd"], config["strain"]["save"])
     prev_wd = os.path.join(config["io"]["abswd"], config["unitcell"]["save"])
+    restart = config['strain'].get('restart', False)
 
     atoms = ase_IO.read(f'{prev_wd}/{name}-unitcell_relaxed.extxyz')
     logfile = f'{cwd}/volume_fixed_relaxation.log'
@@ -19,6 +20,13 @@ def run_volume_fixed_relaxation(config, calc):
 
     strained_output = []
     for i, eps in enumerate(config['strain']['eps']):
+        per_eps = f'{cwd}/{name}-{eps}_relaxed.extxyz'
+
+        if restart and os.path.isfile(per_eps):
+            logger.info(f'[restart] strain {eps}: loading cached relaxed structure from {per_eps}')
+            strained_output.append(ase_IO.read(per_eps))
+            continue
+
         logger.info(f'Relaxing structure with volumetric strain {eps}')
         strained = apply_isometric_strain(atoms, eps)
         init_vol = round(strained.get_volume()/len(strained), 4)
@@ -30,7 +38,7 @@ def run_volume_fixed_relaxation(config, calc):
 
         steps, force_conv = strained.info['steps'], strained.info['force_conv']
         post_vol = round(strained.get_volume()/len(strained), 4)
-        # ase_IO.write(f'{cwd}/{name}-{eps}_relaxed.extxyz', strained, format='extxyz')
+        ase_IO.write(per_eps, strained, format='extxyz')
 
         strained_output.append(strained)
 

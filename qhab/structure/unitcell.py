@@ -8,9 +8,14 @@ from qhab.logger import logger
 def run_unitcell_relaxation(config, calc):
     name = config['io']['name']
     cwd = os.path.join(config["io"]["abswd"], config["unitcell"]["save"])
+    out = f'{cwd}/{name}-unitcell_relaxed.extxyz'
+
+    if config['unitcell'].get('restart', False) and os.path.isfile(out):
+        logger.info(f'[restart] {name} unit cell already relaxed at {out}; skipping')
+        return
 
     atoms = ase_IO.read(config['io']['input'], **config['io']['load_args'])
-    logfile = f'{cwd}/unitcell_relaxation.log' 
+    logfile = f'{cwd}/unitcell_relaxation.log'
     relaxer = get_relaxer(config, calc, opt_type='unitcell', logfile=logfile)
     init_sgn = get_spgnum(atoms)
     atoms = relaxer.run(atoms)
@@ -18,7 +23,7 @@ def run_unitcell_relaxation(config, calc):
     post_sgn = get_spgnum(atoms)
 
     steps, force_conv = atoms.info['steps'], atoms.info['force_conv']
-    ase_IO.write(f'{cwd}/{name}-unitcell_relaxed.extxyz', atoms, format='extxyz')
+    ase_IO.write(out, atoms, format='extxyz')
 
     if steps >= config['relax']['unitcell']['steps'] or not force_conv:
         logger.warning(f'{name} unit cell relaxation did not converge in {steps}')

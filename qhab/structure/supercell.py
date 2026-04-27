@@ -20,8 +20,15 @@ def calculate_force(supercells_with_displacements, calc):
 def run_force_calculation(config, calc):
     name = config['io']['name']
     cwd = os.path.join(config["io"]["abswd"], config["supercell"]["save"])
+    restart = config['supercell'].get('restart', False)
 
     for i, eps in enumerate(config['strain']['eps']):
+        force_set_path = f'{cwd}/{name}-{eps}-force_set.npy'
+
+        if restart and os.path.isfile(force_set_path):
+            logger.info(f'[restart] supercell forces for {name}-{eps} already at {force_set_path}; skipping')
+            continue
+
         logger.info(f'Processing one-shot force calculation of supercell for {name} with volumetric strain {eps}')
         supercells_with_displacements = glob.glob(f'{cwd}/{name}-{eps}-*.extxyz')
         force_set = calculate_force(supercells_with_displacements, calc)

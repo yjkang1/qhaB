@@ -12,13 +12,20 @@ def run_mesh_computation(config):
     cwd = os.path.join(config["io"]["abswd"], config["mesh"]["save"])
     sc_wd = os.path.join(config["io"]["abswd"], config["supercell"]["save"])
     fc2_wd = os.path.join(config["io"]["abswd"], config["fc2"]["save"])
+    restart = config['mesh'].get('restart', False)
 
     thermal_kwargs = {'t_min': config['mesh']['thermal']['t_min'],
                       't_max': config['mesh']['thermal']['t_max'],
                       't_step': config['mesh']['thermal']['t_step']
                       }
-   
+
     for i, eps in enumerate(config['strain']['eps']):
+        thermal_yaml = f'{cwd}/{name}-{eps}-thermal_properties.yaml'
+
+        if restart and os.path.isfile(thermal_yaml):
+            logger.info(f'[restart] mesh for {name}-{eps} already complete at {thermal_yaml}; skipping')
+            continue
+
         logger.info(f'Computing mesh and mesh properties for volumetric strain {eps} [{i+1}/{len(config["strain"]["eps"])}]')
         ph = load(f'{sc_wd}/{name}-{eps}-phonopy.yaml.xz')
         ph.force_constants = ph_IO.read_force_constants_hdf5(f'{fc2_wd}/{name}-{eps}-force_constants.hdf5')

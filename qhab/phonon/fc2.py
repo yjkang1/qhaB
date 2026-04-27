@@ -10,13 +10,20 @@ def run_fc2_computation(config):
     name = config['io']['name']
     cwd = os.path.join(config["io"]["abswd"], config["fc2"]["save"])
     prev_wd = os.path.join(config["io"]["abswd"], config["supercell"]["save"])
+    restart = config['fc2'].get('restart', False)
 
     for i, eps in enumerate(config['strain']['eps']):
+        fc_path = f'{cwd}/{name}-{eps}-force_constants.hdf5'
+
+        if restart and os.path.isfile(fc_path):
+            logger.info(f'[restart] fc2 for {name}-{eps} already at {fc_path}; skipping')
+            continue
+
         logger.info(f'Computing 2nd-order force constants for volumetric strain {eps} [{i+1}/{len(config["strain"]["eps"])}]')
         ph = load(f'{prev_wd}/{name}-{eps}-phonopy.yaml.xz')
         force_set = np.load(f'{prev_wd}/{name}-{eps}-force_set.npy')
         ph.forces = force_set
         ph.produce_force_constants()
         fc2 = ph.force_constants
-        ph_IO.write_force_constants_to_hdf5(force_constants=fc2, filename=f'{cwd}/{name}-{eps}-force_constants.hdf5')
+        ph_IO.write_force_constants_to_hdf5(force_constants=fc2, filename=fc_path)
         ph_IO.write_FORCE_CONSTANTS(force_constants=fc2, filename=f'{cwd}/{name}-{eps}-FORCE_CONSTANTS') # debug

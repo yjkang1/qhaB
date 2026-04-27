@@ -14,7 +14,6 @@ from qhab.logger import logger
 
 def run_qha(config):
     name = config['io']['name']
-    logger.info(f'Preprocessing inputs for QHA of {name}')
     conf = config['qha']
 
     cwd = os.path.join(config["io"]["abswd"], config["qha"]["save"])
@@ -22,6 +21,12 @@ def run_qha(config):
     sc_wd = os.path.join(config["io"]["abswd"], config["supercell"]["save"])
     fc2_wd = os.path.join(config["io"]["abswd"], config["fc2"]["save"])
     mesh_wd = os.path.join(config["io"]["abswd"], config["mesh"]["save"])
+
+    if conf.get('restart', False) and os.path.isfile(f'{cwd}/thermal_expansion.dat'):
+        logger.info(f'[restart] QHA for {name} already complete at {cwd}; skipping')
+        return
+
+    logger.info(f'Preprocessing inputs for QHA of {name}')
 
     # ph = load(f'{fc2_wd}/{name}-{eps}-phonopy.yaml.xz')
     primitive_matrix = np.array(config['supercell']['primitive'])
