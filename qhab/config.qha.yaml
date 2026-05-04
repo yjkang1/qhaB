@@ -29,7 +29,7 @@ calculator:
     tag: 7net_0
 
 unitcell:
-    run: true
+    run: false
     save: ./unitcell
 
 strain:
@@ -39,22 +39,22 @@ strain:
     eps: [-0.05, -0.04, -0.03, -0.02, -0.01, 0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08]
 
 supercell:
-    generate: false
-    calc: false
+    generate: true
+    calc: true
     restart: false
     matrix: [4, 4, 4]
     primitive: [[1,0,0],[0,1,0],[0,0,1]]
-    distance: 0.01
+    distance: 0.02
     random_seed: 42
     save: ./supercell
 
 fc2:
-    run: false
+    run: true
     restart: false
     save: ./fc2
 
 mesh:
-    run: false
+    run: true
     restart: false
     mesh: 
         run: true

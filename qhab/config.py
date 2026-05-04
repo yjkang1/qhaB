@@ -49,7 +49,7 @@ SUPERCELL = {
     "restart": False,
     "matrix": [4, 4, 4],
     "primitive": [[1,0,0],[0,1,0],[0,0,1]],
-    "distance": 0.01,
+    "distance": 0.02,
     "random_seed": 42,
     "save": "./supercell"
         }
