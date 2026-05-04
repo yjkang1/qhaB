@@ -1,0 +1,124 @@
+---
+
+io:
+    wd: .
+    name: 100_AlN_216
+    abswd: .
+    format:
+      fig: png
+      fc2: hdf5
+      atom: extxyz
+      mesh: hdf5
+      band: yaml
+      tdos: dat
+      qha:
+          dat: true
+          fig: true
+
+calculator:
+    calc: vasp
+    gga: PE
+
+potcar:
+    _dir: .
+    version: PBE54
+    potcar_version: MPRelaxSet
+
+incar:
+    PREC: Accurate
+    NELMIN: 5
+    NELM: 500
+    ENCUT: 720
+    ISMEAR: 0
+    SIGMA: 1e-02
+    ALGO: Normal
+    LREAL: false
+    ADDGRID: true
+    LWAVE: false
+    LCHARGE: false
+    NPAR: 4
+    ISYM: 1
+    LASPH: true
+
+kptest: false
+entest: false
+
+unitcell:
+    run: false
+    save0: ./unitcell/relax0
+    save1: ./unitcell/relax1
+    symm: 186
+    name: AlN
+    mp-id: mp-asdf
+    incar0:
+        EDIFF: 1e-06
+        EDIFFG: -1e-03
+        ISIF: 3
+        NSW: 100
+        IBRION: 2
+    incar1:
+        EDIFF: 1e-08
+        EDIFFG: -1e-05
+        ISIF: 3
+        NSW: 200
+        IBRION: 2
+    kpoints:
+        mode: gamma
+        grid: [7, 7, 7]
+        # shift: None
+
+strain:
+    run: false
+    save: ./strain
+    eps: [-0.05, -0.04, -0.03, -0.02, -0.01, 0.00, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08]
+    incar:
+        EDIFF: 1e-08
+        EDIFFG: -1e-05
+        ISIF: 4
+        NSW: 200
+        IBRION: 2
+
+supercell:
+    generate: true
+    calc: true
+    restart: false
+    matrix: [4, 4, 4]
+    primitive: [[1,0,0],[0,1,0],[0,0,1]]
+    distance: 0.01
+    random_seed: 42
+    save: ./supercell
+
+fc2:
+    run: false
+    restart: false
+    save: ./fc2
+
+mesh:
+    run: false
+    restart: false
+    mesh: 
+        run: true
+        numbers: [48, 48, 48]
+    thermal:
+        run: true
+        t_min: 0
+        t_max: 1201
+        t_step: 1
+    tdos:
+        run: true
+    pdos:
+        run: true
+    band:
+        run: true
+    save: ./mesh
+
+qha:
+    run: false
+    t_max: 1201
+    thin_number: 50
+    eos: birch_murnaghan
+    save: ./qha-sym
+    eps: [-0.05, -0.04, -0.03, -0.02, -0.01, 0.00, 0.01, 0.02, 0.03, 0.04, 0.05]
+    symm: true
+
+...
