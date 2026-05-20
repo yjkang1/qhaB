@@ -13,10 +13,10 @@ CALC_DCT = {
     }
 
 NANO_DCT = {
-        4.5: 'nano_cut4.5',
-        5.0: 'nano_cut5.0',
-        5.5: 'nano_cut5.5',
-        6.0: 'nano_cut6.0',
+        4.5: 'nano-cut45',
+        5.0: 'nano-cut50',
+        5.5: 'nano-cut55',
+        6.0: 'nano-cut60',
         }
 
 FUNC_DCT = {
@@ -39,7 +39,7 @@ def return_calc(config):
     is_nano = (str(model).lower() == 'nano')
     model_path = CALC_DCT.get(model, None) 
     if is_nano:
-        model_path = os.path.join(model_path, NANO_DCT[modal], 'checkpoint_2.pth')
+        model_path = os.path.join(model_path, f'{NANO_DCT[modal]}-checkpoint_2.pth')
 
         calc_kwargs = {
                 'model': model_path,
