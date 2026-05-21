@@ -32,6 +32,21 @@ def phonoatoms2aseatoms(phonoatoms):
     )
     return atoms
 
+def strain_cell(contcar_dir, out_dir, ratio):
+    contcar_file = open(contcar_dir, 'r')
+    lines = contcar_file.readlines()
+
+    poscar_file = open(f'{out_dir}/POSCAR', 'w')
+    strained_lines = lines.copy()
+    strained_lines[1] = f'{ratio}\n'
+
+    for line in strained_lines:
+        poscar_file.write(line)
+    poscar_file.close()
+
+    return
+
+
 def aseatoms2phonoatoms(atoms):
     phonoatoms = PhonopyAtoms(
         atoms.symbols,
@@ -129,7 +144,17 @@ def load_band_yaml(filename: str) -> np.ndarray:
         raise ValueError("No frequencies found in band.yaml")
     return np.array(freqs, dtype=float)
 
+def generate_phonopy(config, unitcell_dir):
+    aseatoms = ase_IO.read(unitcell_dir, format='vasp')
+    phonoatoms = aseatoms2phonoatoms(aseatoms)
 
+    phonon_kwargs = {
+            'supercell_matrix': np.diag(config['supercell']['matrix']),
+            'primitive_matrix': config['supercell']['primitive']
+            }
+
+    phonon = Phonopy(unitcell=phonoatoms, **phonon_kwargs)
+    return phonon
 """
 def read_tods():
     pass

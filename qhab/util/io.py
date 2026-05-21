@@ -41,3 +41,7 @@ def dumpYAML(data, filename, indent=4, sort_keys=False, explicit_start=True, exp
     with open(filename, 'w') as fp:
         yaml.dump(data, fp, Dumper=WDumper, sort_keys=sort_keys, explicit_start=explicit_start, explicit_end=explicit_end, default_flow_style=default_flow_style, indent=indent)
 
+def loadYAML(path):
+    with open(path, 'r') as f:
+        data = yaml.load(f, Loader=yaml.SafeLoader)
+    return data
