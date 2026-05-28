@@ -57,6 +57,16 @@ def run_volume_fixed_relaxation(config, calc):
         else:
             logger.info(f'Volume/atom of {name} w/ {eps} did not change during relaxation ({init_vol} \AA^3/atom)')
 
-    ase_IO.write(f'{cwd}/{name}-strained_relaxed.extxyz', strained_output, format='extxyz')
+    try:
+        ase_IO.write(f'{cwd}/{name}-strained_relaxed.extxyz', strained_output, format='extxyz')
+        for e in config['strain']['eps']:
+            per_eps = f'{cwd}/{name}-{eps}_relaxed.extxyz'
+            os.remove(per_eps)
+    except:
+        atoms_list = [ase_IO.read(f'{cwd}/{name}-{eps}_relaxed.extxyz') for eps in config['strain']['eps']]
+        ase_IO.write(f'{cwd}/{name}-strained_relaxed.extxyz', atoms_list, format='extxyz')
+        for e in config['strain']['eps']:
+            per_eps = f'{cwd}/{name}-{eps}_relaxed.extxyz'
+            os.remove(per_eps)
 
     # torch.cuda.empty_cache()

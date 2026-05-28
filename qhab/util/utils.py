@@ -4,6 +4,9 @@ import yaml
 
 import h5py
 from ase import Atoms
+import ase.io as ase_IO
+
+from phonopy import Phonopy
 
 import spglib
 from phonopy.structure.atoms import PhonopyAtoms
