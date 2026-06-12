@@ -148,7 +148,7 @@ def load_band_yaml(filename: str) -> np.ndarray:
     return np.array(freqs, dtype=float)
 
 def generate_phonopy(config, unitcell_dir):
-    aseatoms = ase_IO.read(unitcell_dir, format='vasp')
+    aseatoms = ase_IO.read(unitcell_dir)
     phonoatoms = aseatoms2phonoatoms(aseatoms)
 
     phonon_kwargs = {
