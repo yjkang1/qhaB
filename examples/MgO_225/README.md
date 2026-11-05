@@ -52,10 +52,12 @@ in the run directory and appends to `qhaB.stdout`.
 
 The files in `reference/` were produced on 2026-03-31 with SevenNet-0 and the qhaB code of
 that date. The run took 3 min 22 s from start to finish (`reference/qhaB.stdout`); the
-hardware was not recorded. The stages that produce these numbers have not changed since,
-apart from bookkeeping: the current code also tags each strained structure with its strain
-(`info['eps']`) and reads the QHA strain set from `qha.eps`, which `config.yaml` sets to the
-full grid.
+hardware was not recorded. Since then, the code has changed in three places that touch
+these stages. The strain stage tags each strained structure with its strain (`info['eps']`),
+and the QHA stage reads its strain set from `qha.eps`, which `config.yaml` sets to the full
+grid; both are bookkeeping. The force stage now sorts the displaced supercells of each
+strain by displacement index, whereas the code of 2026-03-31 took them in directory-listing
+order, which was not logged.
 
 Selected values at 300 K (volume per two-atom primitive cell):
 

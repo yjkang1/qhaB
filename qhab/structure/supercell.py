@@ -23,6 +23,9 @@ def run_force_calculation(config, calc):
 
     for i, eps in enumerate(config['strain']['eps']):
         logger.info(f'Processing one-shot force calculation of supercell for {name} with volumetric strain {eps}')
-        supercells_with_displacements = glob.glob(f'{cwd}/{name}-{eps}-*.extxyz')
+        # phonopy pairs force sets with displacements by position: sort by j, not directory order
+        supercells_with_displacements = sorted(
+            glob.glob(f'{cwd}/{name}-{eps}-supercell-*.extxyz'),
+            key=lambda path: int(path[:-len('.extxyz')].rsplit('-', 1)[1]))
         force_set = calculate_force(supercells_with_displacements, calc)
         np.save(file=f'{cwd}/{name}-{eps}-force_set', arr=force_set)
