@@ -1,0 +1,81 @@
+# qhaB example: rock-salt MgO (Fm-3m, No. 225) with SevenNet-0.
+# Run from this directory:
+#     qhab --config config.yaml --name MgO_225
+# Keys left out here take their defaults from qhab/config.py.
+---
+
+io:
+    input: ./MgO_225.extxyz          # read with ase.io.read(input, **load_args)
+    load_args:
+        format: extxyz
+        index: 0
+
+calculator:
+    calc: 7net                       # SevenNet backend
+    model: zero                      # SevenNet-0 (pretrained keyword 7net-0)
+    modal: false                     # single-fidelity model: no modal
+    d3: false
+
+unitcell:
+    run: true                        # stage 1: full relaxation of the input cell
+    save: ./unitcell
+
+strain:
+    run: true                        # stage 2: fixed-volume relaxation at each strain
+    save: ./strain
+    # Each strain scales the lattice vectors by (1 + eps): V = V0 * (1 + eps)**3.
+    # The values appear in file names; write them identically in qha.eps.
+    eps: [-0.04, -0.02, 0.0, 0.02, 0.04, 0.06, 0.08]
+
+supercell:
+    generate: true                   # stage 3: displaced supercells (phonopy)
+    calc: true                       # stage 4: uMLIP forces on the displaced supercells
+    matrix: [4, 4, 4]                # diagonal supercell of the 8-atom input cell
+    primitive: [[0, 0.5, 0.5], [0.5, 0, 0.5], [0.5, 0.5, 0]]
+    save: ./supercell
+
+fc2:
+    run: true                        # stage 5: second-order force constants
+    save: ./fc2
+
+mesh:
+    run: true                        # stage 6: q-mesh, thermal properties, DOS, bands
+    mesh:
+        run: true
+        numbers: [48, 48, 48]
+    thermal:
+        run: true
+        t_min: 0
+        t_max: 1201
+        t_step: 1
+    tdos:
+        run: true
+    band:
+        run: true                    # band structure (written only when tdos.run is true)
+    save: ./mesh
+
+qha:
+    run: true                        # stage 7: EOS fit of F(V, T)
+    eps: [-0.04, -0.02, 0.0, 0.02, 0.04, 0.06, 0.08]   # subset of strain.eps
+    eos: birch_murnaghan             # phonopy EOS: birch_murnaghan, vinet, murnaghan
+    t_max: 1201
+    thin_number: 50
+    save: ./qha
+
+relax:
+    unitcell:
+        fmax: 1.0e-05                # eV/Angstrom
+        steps: 5000
+        optimizer: fire2             # fire, fire2, lbfgs
+        fix_symm: true
+        cell_filter: frechet         # frechet, unitcell
+        mask: [1, 1, 1, 1, 1, 1]
+    strain:
+        fmax: 1.0e-05
+        steps: 5000
+        optimizer: fire2
+        fix_symm: true
+        const_volume: true           # relax positions and cell shape at fixed volume
+        cell_filter: frechet
+        mask: [1, 1, 1, 1, 1, 1]
+...

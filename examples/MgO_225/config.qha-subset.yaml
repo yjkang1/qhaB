@@ -1,0 +1,51 @@
+# qhaB example: re-fit the MgO quasiharmonic free energy on a subset of the
+# strain grid, reusing the structures and phonons of the run made with
+# config.yaml. The two largest strains (+0.06, +0.08) are dropped from the fit.
+# Run afterwards, in the same directory and with the same --name:
+#     qhab --config config.qha-subset.yaml --name MgO_225
+# Only stage 7 runs, so no uMLIP calculator is loaded.
+---
+
+io:
+    input: ./MgO_225.extxyz          # must exist, although it is not read again
+    load_args:
+        format: extxyz
+        index: 0
+
+calculator:
+    calc: 7net
+    model: zero
+    modal: false
+
+unitcell:
+    run: false
+    save: ./unitcell
+
+strain:
+    run: false
+    save: ./strain
+    eps: [-0.04, -0.02, 0.0, 0.02, 0.04, 0.06, 0.08]   # strains of the first run
+
+supercell:
+    generate: false
+    calc: false
+    matrix: [4, 4, 4]
+    primitive: [[0, 0.5, 0.5], [0.5, 0, 0.5], [0.5, 0.5, 0]]   # must match the first run
+    save: ./supercell
+
+fc2:
+    run: false
+    save: ./fc2
+
+mesh:
+    run: false
+    save: ./mesh
+
+qha:
+    run: true
+    eps: [-0.04, -0.02, 0.0, 0.02, 0.04]   # at least 5 strains are required
+    eos: birch_murnaghan             # change to vinet or murnaghan to compare EOS forms
+    t_max: 1201
+    thin_number: 50
+    save: ./qha-subset               # separate directory: ./qha is left untouched
+...
