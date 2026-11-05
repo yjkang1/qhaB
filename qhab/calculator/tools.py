@@ -17,8 +17,7 @@ def load_calc(config): # TODO
     import importlib.util
     from pathlib import Path
     script = f'{CALC_DCT.get(config["calculator"]["calc"], "sevenn")}_calculator.py'
-    file_path =  f'/path/to/qhaB/qhab/calculator/{script}' #TODO
-    # file_path = Path(script).resolve()
+    file_path = str(Path(__file__).resolve().parent / script)
     spec = importlib.util.spec_from_file_location('return_calc', file_path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)

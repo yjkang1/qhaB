@@ -1,15 +1,11 @@
-"""
-Modified based on Jinmu Yu's code
-"""
-
 from types import NotImplementedType
 import warnings, os
 from sevenn.calculator import SevenNetCalculator
 
+# Local checkpoints. A model that is not listed here is loaded through its
+# SevenNet pretrained keyword '7net-<model>' (e.g. model: omni -> 7net-omni).
 CALC_DCT = {
-    'ompa': '/path/to/ompa/checkpoint_2.pth',
-    'omni': '/path/to/omni/checkpoint_1.pth',
-    'nano': '/path/to/nano',
+    'nano': '/path/to/nano',  # directory holding nano_cut<rc>/checkpoint_2.pth
     }
 
 NANO_DCT = {

@@ -1,10 +1,6 @@
-"""
-Modified based on Jinmu Yu's code
-"""
-
 from fairchem.core import OCPCalculator
 
-HEAD = '/path/to/checkpoints'
+HEAD = '/path/to/checkpoints'  # directory holding eSEN/esen_30m_{oam,omat}.pt
 
 CALC_DCT = {
     'oam': f"{HEAD}/eSEN/esen_30m_oam.pt",
